@@ -39,20 +39,27 @@ public class FindWindow {
 	    /* 
 	    Still not 100% working :
 	    - the highlighted text isn't focused by the cursor
-	    - if there's more than one occurrence, the program keeps highlighting the first one
+	    - if there's more than one occurrence, the below method highlights all of them
 	    */
 		nextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 			    // removing previous highlight when clicking on Next button
 			    highlighter.removeAllHighlights();
 			    
-				int indexStart = noobPad.getTextArea().getText().indexOf(textField.getText());
-				int indexEnd = indexStart + textField.getText().length();
-				try {
-					highlighter.addHighlight(indexStart, indexEnd, painter);
-				} catch (BadLocationException e) {
-					e.printStackTrace();
-				}
+			    String userInput = new String(textField.getText());
+			    String textFile = new String(noobPad.getTextArea().getText());
+			    int indexStart = textFile.indexOf(userInput);
+			    int indexEnd = indexStart + userInput.length();
+			    
+			    while(indexStart >= 0) { // indexOf returns -1 when no occurrences are found
+			    	try {
+						highlighter.addHighlight(indexStart, indexEnd, painter);
+					} catch (BadLocationException e) {
+						e.printStackTrace();
+					}
+			    	indexStart = textFile.indexOf(userInput, indexStart+1);
+			    	indexEnd = indexStart + userInput.length();
+			    }
 			}
 		});
 		
