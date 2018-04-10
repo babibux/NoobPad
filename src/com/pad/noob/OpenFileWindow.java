@@ -26,6 +26,8 @@ public class OpenFileWindow {
 				e.printStackTrace();
 			}
 			noobPad.setTitle(noobPad.getAppName() + " - " + fc.getSelectedFile());
+			// set cursor position to the top of the document
+			noobPad.getTextArea().setCaretPosition(0);
 			
 		}
 	}

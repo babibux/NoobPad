@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -17,7 +18,7 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 public class FindWindow {
-	JFrame frame = new JFrame();
+	JDialog frame = new JDialog();
 	JTextField textField = new JTextField(15);
 	JButton nextBtn = new JButton("Next");
 	
@@ -57,6 +58,7 @@ public class FindWindow {
 					} catch (BadLocationException e) {
 						e.printStackTrace();
 					}
+			    	//noobPad.getTextArea().setCaretPosition(indexStart);
 			    	indexStart = textFile.indexOf(userInput, indexStart+1);
 			    	indexEnd = indexStart + userInput.length();
 			    }
