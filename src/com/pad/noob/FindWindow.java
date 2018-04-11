@@ -40,8 +40,8 @@ public class FindWindow {
 			    // removing previous highlight when clicking on Next button
 			    highlighter.removeAllHighlights();
 			    
-			    String userInput = new String(textField.getText());
-			    String textFile = new String(noobPad.getTextArea().getText());
+			    String userInput = new String(textField.getText().toLowerCase());
+			    String textFile = new String(noobPad.getTextArea().getText().toLowerCase());
 			    int indexStart = textFile.indexOf(userInput, keepSearch);
 			    int indexEnd = indexStart + userInput.length();
 			    
@@ -53,16 +53,17 @@ public class FindWindow {
 			    	}
 			    }
 			    else {
-			    	JOptionPane.showMessageDialog(frame, "End of the research session.");
+			    	JOptionPane.showMessageDialog(noobPad, "Cannot find \"" + textField.getText() + "\"");
 			    }
 			    keepSearch = indexEnd -1;
 		});
 		
-		// removing previous highlight when closing the Find window
+		// reseting highlighter and search index when closing the Find window
 		frame.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent ev) {
 		    	  highlighter.removeAllHighlights();
 		    	  frame.dispose();
+		    	  keepSearch = 0;
 		        }
 		});
 	}
